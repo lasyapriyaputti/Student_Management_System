@@ -1,6 +1,6 @@
 import pandas as pd
 from database import CSV_FILE,save
-#new admission
+
 def New_Student():
     try:
          Roll_No=int(input("Enter Roll_No: "))
@@ -45,10 +45,30 @@ def New_Student():
     "Quiz_Marks": quiz,
     "Final_Marks": final
     }
-    df = pd.read_csv(CSV_FILE) #added
+    df = pd.read_csv(CSV_FILE) 
     df = pd.concat([df, pd.DataFrame([student])], ignore_index=True)
     save(df)
     print("Record updated successfully!")
+
+def Lookup_Student():
+    df=pd.read_csv(CSV_FILE)
+    choice=input("Lookup_Student using Name(1) or Lookup_Student using Roll_No(2) Enter Your Choice:")
+    if choice=="1":
+        Name=input("Enter Name:")
+        result=df[df["Name"].str.contains(Name,case=False)]
+    elif choice=="2":
+        Roll_No=int(input("Enter Roll_No:"))
+        result=df[df["Roll_No"]==Roll_No] 
+    else:
+        print("Invalid Choice:")     
+
+    if not result.empty:
+        print(result)
+    else :
+        print("Student not found")    
+       
+
+
 
 
 
