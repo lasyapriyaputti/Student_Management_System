@@ -65,7 +65,53 @@ def Lookup_Student():
     if not result.empty:
         print(result)
     else :
-        print("Student not found")    
+        print("Student not found")
+
+def Update_Student_details():
+    df=pd.read_csv(CSV_FILE)
+    name=input("Enter student name:")
+    mask=df["Name"].str.contains(name,case=False)
+    print("\nStudent details Before update")
+    print(df.loc[mask])
+    choice=int(input("Enter Your Choice\n option 1 : Update Attendance\n  option 2 : Update Mid1_Marks\n option 3 : Update Mid2_Marks\n option 4 : Update Quiz_Marks"))
+    if choice==1:
+        Attendance=int(input("Enter current Attendance: "))
+        df.loc[mask,"Attendance_%"]=Attendance
+        
+    elif choice==2:
+        Mid1_Marks=int(input("Enter current Mid1_Marks: "))
+        df.loc[mask,"Mid1_Marks"]=Mid1_Marks
+        
+    elif choice==3:
+        Mid2_Marks=int(input("Enter current Mid2_Marks: "))
+        df.loc[mask,"Mid2_Marks"]=Mid2_Marks
+        
+    elif choice==4:
+        Quiz_Marks=int(input("Enter current Quiz_Marks: "))
+        df.loc[mask,"Quiz_Marks"]=Quiz_Marks
+         
+    else:
+        print("Invalid choice")
+        return 
+
+    df.loc[mask, "Final_Marks"] = (
+    df.loc[mask, "Mid1_Marks"].values[0] +
+    df.loc[mask, "Mid2_Marks"].values[0] +
+    df.loc[mask, "Quiz_Marks"].values[0]
+    )
+    save(df)
+      
+    print("\nStudent details AFTER update")
+    print(df.loc[mask])      
+
+
+
+
+
+
+        
+
+
        
 
 
