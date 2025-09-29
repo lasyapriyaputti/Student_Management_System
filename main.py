@@ -1,6 +1,6 @@
 import pandas as pd
 from database import init_files
-from operations import New_Student,Lookup_Student,Update_Student_details
+from operations import New_Student,Lookup_Student,Update_Student_details,Delete_student_record
 def menu():
     print("--- Student Management System ---")
     print("1. Add New Student")
@@ -24,7 +24,7 @@ if __name__ == "__main__":
         elif choice == '3':
             Update_Student_details()
         elif choice == '4':
-             print("Still in progress")
+            Delete_student_record()
         elif choice == '5':
              print("Still in progress")
         elif choice == '6':

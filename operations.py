@@ -102,7 +102,21 @@ def Update_Student_details():
     save(df)
       
     print("\nStudent details AFTER update")
-    print(df.loc[mask])      
+    print(df.loc[mask])    
+
+def Delete_student_record():
+    df=pd.read_csv(CSV_FILE) 
+    rollno=int(input("Enter student Roll_No to be deleted:" ))    
+    mask=df["Roll_No"]==rollno;  
+    if df[mask].empty:
+        print("Student not found")
+        return
+    df=df.drop(df[mask].index)
+    save(df)
+    print("\nRecord deleted successfully!")    
+
+
+
 
 
 
