@@ -113,8 +113,28 @@ def Delete_student_record():
         return
     df=df.drop(df[mask].index)
     save(df)
-    print("\nRecord deleted successfully!")    
+    print("\nRecord deleted successfully!")
 
+def Report_card():
+    df = pd.read_csv(CSV_FILE)
+    print("Enter Branch and Year:")
+    branch = input()
+    year = int(input())
+
+    mask = (df["Branch"] == branch) & (df["Year"] == year)
+    mask2 = df[mask]
+
+    Total_students = mask2.shape[0]
+    Class_average = mask2["Final_Marks"].mean()
+    Highest_scorer = mask2["Final_Marks"].max()
+    Highest_scored_student = mask2[mask2["Final_Marks"] == Highest_scorer]["Name"].tolist()
+    Lowest_scorer = mask2["Final_Marks"].min()
+    Lowest_scored_student = mask2[mask2["Final_Marks"] == Lowest_scorer]["Name"].tolist()
+
+    print(f"Total students: {Total_students}")
+    print(f"Class average: {Class_average:.2f}")
+    print(f"Highest scorer: {Highest_scorer} - {Highest_scored_student}")
+    print(f"Lowest scorer: {Lowest_scorer} - {Lowest_scored_student}")
 
 
 
